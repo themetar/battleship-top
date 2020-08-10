@@ -1,0 +1,2 @@
+# don't track node modules
+node_modules
