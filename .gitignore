@@ -1,2 +1,5 @@
 # don't track node modules
 node_modules
+
+# don't track output script
+dist/script.js

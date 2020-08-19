@@ -4,7 +4,9 @@
   "description": "battleship game",
   "scripts": {
     "test": "jest ./src/test",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
   },
   "keywords": [
     "battleship"
@@ -14,6 +16,15 @@
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
-    "jest": "^26.3.0"
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "jest": "^26.3.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
