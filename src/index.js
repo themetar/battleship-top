@@ -1,4 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-ReactDOM.render(<p>Hello React</p>, document.getElementById("root"));
+import Game from "./game/Game";
+
+ReactDOM.render(<Game />, document.getElementById("root"));

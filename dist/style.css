@@ -1,0 +1,22 @@
+#charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+
+.chart {
+  --grid-size: 10;
+  --cell-size: 50px;
+  
+  display: grid;
+  grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+  grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+  grid-auto-flow: column;
+  
+  width: calc(var(--grid-size) * var(--cell-size));
+  height: calc(var(--grid-size) * var(--cell-size));
+}
+
+.cell {
+  border: 1px solid black;
+}
