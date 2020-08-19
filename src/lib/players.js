@@ -17,4 +17,31 @@ function AIPlayerFactory(enemyBoard) {
   };
 }
 
-export {AIPlayerFactory};
+function HumanPlayerFactory() {
+  let moveHandler;
+
+  let hasTurn = false;
+
+  const takeTurn = () => {
+    hasTurn = true;
+  };
+
+  const makeMove = attack => {
+    if (hasTurn) {
+      hasTurn = false;
+      
+      if (moveHandler && typeof moveHandler == "function")
+        moveHandler(attack);
+    }
+  };
+
+  return {
+    takeTurn,
+    makeMove,
+    set onMove(handler) {
+      moveHandler = handler;
+    }
+  };
+}
+
+export {AIPlayerFactory, HumanPlayerFactory};

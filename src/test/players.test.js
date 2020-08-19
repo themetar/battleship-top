@@ -1,4 +1,4 @@
-import {AIPlayerFactory} from "../lib/players";
+import {AIPlayerFactory, HumanPlayerFactory} from "../lib/players";
 import GameboardFactory from "../lib/gameboard";
 
 describe("AI player", () => {
@@ -41,5 +41,38 @@ describe("AI player", () => {
     player.onMove = callback;
     
     player.takeTurn();
+  });
+});
+
+describe("Human player", () => {
+  let player;
+
+  beforeEach(() => {
+    player = HumanPlayerFactory();
+  });
+
+  test("Can't make a move if it's not his turn", () => {
+    expect.assertions(0); // onMove doesn't get called
+
+    player.onMove = attack => {
+      expect(attack).toHaveProperty("x");
+      expect(attack).toHaveProperty("y");
+    };
+
+    player.makeMove({x: 3, y: 3});
+  });
+
+  test("Makes a move", done => {
+    expect.assertions(2);    
+
+    player.onMove = attack => {
+      expect(attack).toHaveProperty("x");
+      expect(attack).toHaveProperty("y");
+
+      done();
+    };
+
+    player.takeTurn();   
+    player.makeMove({x: 3, y: 3});
   });
 });
