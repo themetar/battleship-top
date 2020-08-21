@@ -30,8 +30,24 @@ export default function Chart(props) {
   };
 
   return (
-    <div className="chart" style={{"--grid-size": attacks.length}} onClick={ props.active ? clickHandler : undefined }>
-      {cells}
+    <div className="chart-container">
+      <div className="ships">
+        {
+          props.ships.map(ship => {
+            const style = {
+              gridColumn: `${ship.x + 1} / ${ship.x + 1 + ship.width}`,
+              gridRow: `${ship.y + 1} / ${ship.y + 1 + ship.height}`,
+            };
+
+            return <div key={`${ship.x}${ship.y}`}
+                  className="ship"
+                  style={ style }></div>
+          })
+        }
+      </div>
+      <div className="chart" style={{"--grid-size": attacks.length}} onClick={ props.active ? clickHandler : undefined }>
+        {cells}
+      </div>
     </div>
   );
 }

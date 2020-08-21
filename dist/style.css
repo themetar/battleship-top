@@ -4,17 +4,20 @@
   justify-items: center;
 }
 
-.chart {
+.chart-container {
   --grid-size: 10;
   --cell-size: 50px;
-  
+
+  position: relative;
+}
+
+.chart,
+.ships {  
   display: grid;
   grid-template-rows: repeat(var(--grid-size), var(--cell-size));
   grid-template-columns: repeat(var(--grid-size), var(--cell-size));
   grid-auto-flow: column;
-  
-  width: calc(var(--grid-size) * var(--cell-size));
-  height: calc(var(--grid-size) * var(--cell-size));
+  gap: 2px;
 }
 
 .cell {
@@ -23,4 +26,13 @@
 
 .cell.hit {
   color: red;
+}
+
+.ships {
+  position: absolute;
+  z-index: -1;
+}
+
+.ship {
+  background: black;
 }
