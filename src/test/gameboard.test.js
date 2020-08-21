@@ -108,3 +108,56 @@ test("Gameboard reporst all ships sunk (or not)", () => {
                                                 ["hit","","",""]]);
   expect(gameboard.allShipsSunk()).toBe(true);
 });
+
+test("Gameboard exposes ships' positions", () => {
+  const ships = [
+    {
+      x: 1,
+      y: 0,
+      width: 3,
+      height: 1,
+    },
+    {
+      x: 2,
+      y: 2,
+      width: 1,
+      height: 1,
+    },
+  ];
+
+  const gameboard = GameboardFactory(ships, 4);
+
+  expect(gameboard.shipsLocations).toStrictEqual(ships);
+});
+
+test("Gameboard exposes sunken ships' positions", () => {
+  const ships = [
+    {
+      x: 1,
+      y: 0,
+      width: 3,
+      height: 1,
+    },
+    {
+      x: 2,
+      y: 2,
+      width: 1,
+      height: 1,
+    },
+  ];
+
+  const gameboard = GameboardFactory(ships, 4);
+
+  gameboard.receiveAttack(1, 0);
+  gameboard.receiveAttack(2, 0);
+  gameboard.receiveAttack(3, 0);
+
+  expect(gameboard.sunkShipsLocations).toStrictEqual([
+    {
+      x: 1,
+      y: 0,
+      width: 3,
+      height: 1,
+    }
+  ]);
+});

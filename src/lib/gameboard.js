@@ -45,6 +45,8 @@ function GameboardFactory(shipsDescription = [], size = 10) {
     receiveAttack,
     allShipsSunk,
     get attackChart() { return chart; },
+    get shipsLocations() { return shipsData.map(({position}) => position); },
+    get sunkShipsLocations() { return shipsData.filter(({ship}) => ship.isSunk()).map(({position}) => position); }
   };
 }
 
