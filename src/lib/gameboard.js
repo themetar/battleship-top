@@ -50,4 +50,60 @@ function GameboardFactory(shipsDescription = [], size = 10) {
   };
 }
 
+/* Utility function: Random ship placement */
+
+function randomFleetPlacement(boardSize, lengths) {
+  const stack = [];
+  const positions = [];
+  let i = 0;
+  while (true) {
+    if (i == lengths.length) break;
+
+    const shipLength = lengths[i];
+
+    let options;
+
+    if (stack[i]) {
+      options = stack.pop();
+    } else {
+      options = [];
+      
+      // horizontal ship
+      for (let x = 0; x <= boardSize - shipLength; x++) {
+        for (let y = 0; y < boardSize; y++) {
+          const ship = {x, y, width: shipLength, height: 1};
+          if (!positions.some(pos => hitTest(pos, ship))) {
+            options.push(ship);
+          }
+        }
+      }
+
+      // vertical
+      for (let x = 0; x < boardSize; x++) {
+        for (let y = 0; y <= boardSize - shipLength; y++) {
+          const ship = {x, y, width: 1, height: shipLength};
+          if (!positions.some(pos => hitTest(pos, ship))) {
+            options.push(ship);
+          }
+        }
+      }
+    }
+
+    // choose
+    if (options.length > 0) {
+      const r = Math.floor(Math.random() * options.length);
+      const choice = options.splice(r, 1)[0];
+      positions.push(choice);
+      i++;
+      stack.push(options);
+    } else {
+      positions.pop();
+      i--;
+    }
+  }
+
+  return positions;
+}
+
 export default GameboardFactory;
+export {randomFleetPlacement};

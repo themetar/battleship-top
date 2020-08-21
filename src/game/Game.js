@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Chart from "./Chart";
 
 import {HumanPlayerFactory, AIPlayerFactory} from "../lib/players";
-import GameboardFactory from "../lib/gameboard";
+import GameboardFactory, {randomFleetPlacement} from "../lib/gameboard";
 
 
 let gameboards;
@@ -10,21 +10,9 @@ let players;
 let currentPlayer = 0;
 
 function initGameObjects() {
-  const playerOneShips = [
-    {x: 0, y: 0, width: 5, height: 1},  // size: 5
-    {x: 2, y: 2, width: 1, height: 4},  // size: 4
-    {x: 8, y: 7, width: 1, height: 3},  // size: 3
-    {x: 1, y: 8, width: 3, height: 1},  // size: 3
-    {x: 5, y: 4, width: 2, height: 1},  // size: 2
-  ];
+  const playerOneShips = randomFleetPlacement(10, [5,4,3,3,2]);
 
-  const playerTwoShips = [
-    {x: 5, y: 1, width: 1, height: 5},  // size: 5
-    {x: 0, y: 2, width: 4, height: 1},  // size: 4
-    {x: 1, y: 4, width: 3, height: 1},  // size: 3
-    {x: 6, y: 8, width: 3, height: 1},  // size: 3
-    {x: 2, y: 7, width: 2, height: 1},  // size: 2
-  ];
+  const playerTwoShips = randomFleetPlacement(10, [5,4,3,3,2]);
 
   gameboards = [
     GameboardFactory(playerOneShips, 10),
@@ -32,8 +20,8 @@ function initGameObjects() {
   ];
 
   players = [
-    HumanPlayerFactory(),             // comment out either Human or AI, to set as first player 
-    // AIPlayerFactory(gameboards[1]), // and uncomment the other
+    // HumanPlayerFactory(),             // comment out either Human or AI, to set as first player 
+    AIPlayerFactory(gameboards[1]), // and uncomment the other
     AIPlayerFactory(gameboards[0]),
   ];
 

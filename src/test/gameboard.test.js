@@ -1,4 +1,4 @@
-import GameboardFactory from "../lib/gameboard";
+import GameboardFactory, {randomFleetPlacement} from "../lib/gameboard";
 
 test("GameboardFactory created a gameboard", () => {
   const gameboard = GameboardFactory();
@@ -160,4 +160,16 @@ test("Gameboard exposes sunken ships' positions", () => {
       height: 1,
     }
   ]);
+});
+
+test("randomFleetPlacement generates ship positions", () => {
+  const ships = randomFleetPlacement(10, [5,4,3]);
+  expect(ships).toBeInstanceOf(Array);
+  expect(ships.length).toBe(3);
+  ships.forEach(o => {
+    expect(o).toHaveProperty("x");
+    expect(o).toHaveProperty("y");
+    expect(o).toHaveProperty("width");
+    expect(o).toHaveProperty("height");
+  });
 });
