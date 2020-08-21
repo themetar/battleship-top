@@ -10,9 +10,25 @@ let players;
 let currentPlayer = 0;
 
 function initGameObjects() {
+  const playerOneShips = [
+    {x: 0, y: 0, width: 5, height: 1},  // size: 5
+    {x: 2, y: 2, width: 1, height: 4},  // size: 4
+    {x: 8, y: 7, width: 1, height: 3},  // size: 3
+    {x: 1, y: 8, width: 3, height: 1},  // size: 3
+    {x: 5, y: 4, width: 2, height: 1},  // size: 2
+  ];
+
+  const playerTwoShips = [
+    {x: 5, y: 1, width: 1, height: 5},  // size: 5
+    {x: 0, y: 2, width: 4, height: 1},  // size: 4
+    {x: 1, y: 4, width: 3, height: 1},  // size: 3
+    {x: 6, y: 8, width: 3, height: 1},  // size: 3
+    {x: 2, y: 7, width: 2, height: 1},  // size: 2
+  ];
+
   gameboards = [
-    GameboardFactory([{x: 0, y: 0, width: 5, height: 1}], 10),
-    GameboardFactory([{x: 5, y: 1, width: 1, height: 5}], 10),
+    GameboardFactory(playerOneShips, 10),
+    GameboardFactory(playerTwoShips, 10),
   ];
 
   players = [
