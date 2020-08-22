@@ -2,6 +2,19 @@
   box-sizing: border-box;
 }
 
+html {
+  --shade-0: #1A2320;
+  --shade-1: #344E41;
+  --shade-2: #3A5A40;
+  --shade-3: #588157;
+  --shade-4: #A3B18A;
+  --shade-5: #DAD7CD;
+  background: var(--shade-4);
+  color: var(--shade-0);
+  font-family: monospace;
+  font-size: 14px;
+}
+
 #charts {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -25,7 +38,7 @@
 }
 
 .cell {
-  border: 1px solid black;
+  border: 1px solid var(--shade-0);
   position: relative;
 }
 
@@ -33,11 +46,12 @@
 .cell.miss::after {
   content: "";
   display: block;
-  background-color: gray;
+  background-color: var(--shade-3);
   width: 25%;
   height: 80%;
   transform-origin: center;
   position: absolute;
+  z-index: -1;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
@@ -50,6 +64,7 @@
   content: "";
   display: block;
   position: absolute;
+  z-index: -1;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -58,14 +73,14 @@
 .cell.hit::before {
   width: 20%;
   height: 20%;
-  background-color: gray;
+  background-color: var(--shade-2);
   border-radius: 50%;
 }
 
 .cell.hit::after {
   width: 80%;
   height: 80%;
-  border: calc(var(--cell-size) / 5) solid gray;
+  border: calc(var(--cell-size) / 5) solid var(--shade-2);
   border-radius: 50%;
 }
 
@@ -75,7 +90,7 @@
 }
 
 .ship {
-  background: black;
+  background: var(--shade-0);
 }
 
 .container {
@@ -84,6 +99,7 @@
 
 .prompt {
   position: absolute;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -93,4 +109,41 @@
 .outcome {
   font-size: 6rem;
   text-transform: uppercase;
+  color: var(--shade-5);
+  text-shadow: .25rem .25rem var(--shade-1) ;
+  transform: translateX(50%);
+  animation: slide 400ms forwards;
+}
+
+@keyframes slide {
+  from {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+button {
+  font: inherit;
+  background: var(--shade-5);
+  border: none;
+  padding: .5em 1em;
+  border: 2px solid var(--shade-5);
+  border-right-color: var(--shade-2);
+  border-bottom-color: var(--shade-2);
+}
+
+button:hover {
+  border: 2px solid var(--shade-5);
+  border-left-color: var(--shade-2);
+  border-top-color: var(--shade-2);
+}
+
+button:active {
+  background: var(--shade-3);
+  color: var(--shade-5);
 }
