@@ -10,7 +10,6 @@ export default function Chart(props) {
               data-x={x}
               data-y={y}
               className={`cell ${mark}`}>
-          {mark}
         </span>
       )
     ))
