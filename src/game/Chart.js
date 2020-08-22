@@ -25,7 +25,8 @@ export default function Chart(props) {
     const y = parseInt(cell.getAttribute("data-y"));
 
     if (props.commandCallback && !(isNaN(x) || isNaN(y))) {
-      props.commandCallback({x, y});
+      if (attacks[x][y] == "")
+        props.commandCallback({x, y});
     }
   };
 
