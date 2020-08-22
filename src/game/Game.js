@@ -82,24 +82,32 @@ export default function Game() {
       <header>
         <h1>Battleship</h1>
       </header>
-      <div id="charts">
-        <p>{gamePhase == "playing" && player == 1 && "Incoming"}</p>
-        <p>{gamePhase == "playing" && player == 0 && "Attack"}</p>
-        <Chart attacks={humanChart} ships={ gameboards[0].shipsLocations } />
-        <Chart attacks={aiChart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" } />
+      <div className="container">
+        <div className="prompt">
+          { gamePhase == "over" && (
+            player == 0 && <div className="outcome">Victory!</div> ||
+            player == 1 && <div className="outcome">Defeat.</div>
+          ) }
+          { gamePhase == "pre" && (
+            <div>
+              <p>Shall we engage in combat, sir?</p>
+              <button onClick={ onPlay }>To battle stations!</button>
+            </div>
+          ) }
+          { gamePhase == "over" && (
+            <div>
+              <p>Play again?</p>
+              <button onClick={ onRestart }>Restart</button>
+            </div>
+          ) }
+        </div>
+        <div id="charts">
+          <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
+          <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>"Attack"</p>
+          <Chart attacks={humanChart} ships={ gameboards[0].shipsLocations } />
+          <Chart attacks={aiChart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" } />
+        </div>
       </div>
-      { gamePhase == "pre" && (
-        <div>
-          <p>Shall we engage in combat, sir?</p>
-          <button onClick={ onPlay }>To battle stations!</button>
-        </div>
-      ) }
-      { gamePhase == "over" && (
-        <div>
-          <p>Play again?</p>
-          <button onClick={ onRestart }>Restart</button>
-        </div>
-      ) }
     </div>
   );
 }
