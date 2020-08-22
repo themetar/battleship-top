@@ -20,8 +20,8 @@ function initGameObjects() {
   ];
 
   players = [
-    // HumanPlayerFactory(),             // comment out either Human or AI, to set as first player 
-    AIPlayerFactory(gameboards[1]), // and uncomment the other
+    HumanPlayerFactory(),             // comment out either Human or AI, to set as first player 
+    // AIPlayerFactory(gameboards[1]), // and uncomment the other
     AIPlayerFactory(gameboards[0]),
   ];
 
@@ -103,7 +103,7 @@ export default function Game() {
         </div>
         <div id="charts">
           <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
-          <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>"Attack"</p>
+          <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>Attack</p>
           <Chart attacks={humanChart} ships={ gameboards[0].shipsLocations } />
           <Chart attacks={aiChart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" } />
         </div>
