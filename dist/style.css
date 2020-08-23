@@ -21,6 +21,13 @@ html {
   justify-items: center;
 }
 
+#charts p {
+  background: var(--shade-0);
+  color: var(--shade-4);
+  font-size: 1.5rem;
+  padding: .5em 1em;
+}
+
 .chart-container {
   --grid-size: 10;
   --cell-size: 50px;
