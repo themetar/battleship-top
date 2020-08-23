@@ -13,11 +13,14 @@ html {
   color: var(--shade-0);
   font-family: monospace;
   font-size: 14px;
+  padding-left: .5rem;
+  padding-right: .5rem;
 }
 
 #charts {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   justify-items: center;
 }
 
@@ -33,6 +36,17 @@ html {
   --cell-size: 50px;
 
   position: relative;
+}
+
+.chart-container:nth-child(3) {
+  --cell-size: 40px;
+  align-self: center;
+  --shade-0: #DAD7CD;
+  --shade-1: #A3B18A;
+  --shade-2: #588157;
+  --shade-3: #3A5A40;
+  --shade-4: #344E41;
+  --shade-5: #1A2320;
 }
 
 .chart,
