@@ -125,6 +125,12 @@ html {
   animation: slide 400ms forwards;
 }
 
+.prompt span {
+  display: inline-block;
+  padding: .25em .5em;
+  background: var(--shade-5);
+}
+
 @keyframes slide {
   from {
     opacity: 0;

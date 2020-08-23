@@ -90,13 +90,13 @@ export default function Game() {
           ) }
           { gamePhase == "pre" && (
             <div>
-              <p>Shall we engage in combat, sir?</p>
+              <p><span>Shall we engage in combat, sir?</span></p>
               <button onClick={ onPlay }>To battle stations!</button>
             </div>
           ) }
           { gamePhase == "over" && (
             <div>
-              <p>Play again?</p>
+              <p><span>Play again?</span></p>
               <button onClick={ onRestart }>Restart</button>
             </div>
           ) }
