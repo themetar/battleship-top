@@ -45,7 +45,7 @@ export default function Chart(props) {
           })
         }
       </div>
-      <div className="chart" style={{"--grid-size": attacks.length}} onClick={ props.active ? clickHandler : undefined }>
+      <div className={`chart${props.active ? " active" : ""}`} style={{"--grid-size": attacks.length}} onClick={ props.active ? clickHandler : undefined }>
         {cells}
       </div>
     </div>

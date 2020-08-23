@@ -40,6 +40,7 @@ html {
 .cell {
   border: 1px solid var(--shade-0);
   position: relative;
+  transition: background-color 300ms;
 }
 
 .cell.miss::before,
@@ -83,6 +84,8 @@ html {
   border: calc(var(--cell-size) / 5) solid var(--shade-2);
   border-radius: 50%;
 }
+
+.chart.active .cell:not(.hit):not(.miss):hover { background-color: var(--shade-3); }
 
 .ships {
   position: absolute;
