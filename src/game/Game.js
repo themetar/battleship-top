@@ -4,19 +4,20 @@ import Chart from "./Chart";
 import {HumanPlayerFactory, AIPlayerFactory} from "../lib/players";
 import GameboardFactory, {randomFleetPlacement} from "../lib/gameboard";
 
+const BOARD_SIZE = 10;
 
 let gameboards;
 let players;
 let currentPlayer = 0;
 
 function initGameObjects() {
-  const playerOneShips = randomFleetPlacement(10, [5,4,3,3,2]);
+  const playerOneShips = randomFleetPlacement(BOARD_SIZE, [5,4,3,3,2]);
 
-  const playerTwoShips = randomFleetPlacement(10, [5,4,3,3,2]);
+  const playerTwoShips = randomFleetPlacement(BOARD_SIZE, [5,4,3,3,2]);
 
   gameboards = [
-    GameboardFactory(playerOneShips, 10),
-    GameboardFactory(playerTwoShips, 10),
+    GameboardFactory(playerOneShips, BOARD_SIZE),
+    GameboardFactory(playerTwoShips, BOARD_SIZE),
   ];
 
   players = [
@@ -37,8 +38,11 @@ function copy(chart) {
 export default function Game() {
 
   const [gamePhase, setGamePhase] = useState("pre");
-  const [humanChart, setHumanChart] = useState(gameboards[0].attackChart);
-  const [aiChart, setAIChart] = useState(gameboards[1].attackChart);
+  const charts = gameboards.map(gb => {
+    const [value, setFn] = useState(gb.attackChart);
+    
+    return {chart: value, setChart: setFn};
+  });
   const [player, setPlayer] = useState(currentPlayer);
 
   function gameStep(attack) {
@@ -46,14 +50,11 @@ export default function Game() {
 
     gameboards[nextPlayer].receiveAttack(attack.x, attack.y);
 
-    const updateFn = nextPlayer == 1 ? setAIChart : setHumanChart;
-
-    updateFn(copy(gameboards[nextPlayer].attackChart));
+    charts[nextPlayer].setChart(copy(gameboards[nextPlayer].attackChart));
 
     if (gameboards.findIndex(board => board.allShipsSunk()) != -1) {
       setGamePhase("over");
     } else {
-
       currentPlayer = nextPlayer;
       setPlayer(currentPlayer);
 
@@ -73,8 +74,7 @@ export default function Game() {
   const onRestart = () => {
     setGamePhase("pre");
     initGameObjects();  // reset
-    setAIChart(gameboards[1].attackChart);
-    setHumanChart(gameboards[0].attackChart);
+    charts.forEach((ch, i) => ch.setChart(gameboards[i].attackChart));
   };
 
   return (
@@ -104,8 +104,8 @@ export default function Game() {
         <div id="charts">
           <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
           <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>Attack</p>
-          <Chart attacks={humanChart} ships={ gameboards[0].shipsLocations } />
-          <Chart attacks={aiChart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" && player == 0 } />
+          <Chart attacks={charts[0].chart} ships={ gameboards[0].shipsLocations } />
+          <Chart attacks={charts[1].chart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" && player == 0 } />
         </div>
       </div>
       <div className="overlay"></div>

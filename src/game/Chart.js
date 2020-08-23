@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Chart(props) {
-  const attacks = props.attacks && props.attacks || [];
+  const attacks = props.attacks || [];
 
   const cells = attacks.reduce(
     (acc, col, x) => acc.concat(col.map(
