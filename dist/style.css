@@ -167,5 +167,5 @@ button:active {
   width: 100vw;
   height: 100vh;
   background: repeating-linear-gradient(to bottom, #000 1px 3px, #fff 3px 5px);
-  opacity: .2;
+  opacity: .15;
 }
