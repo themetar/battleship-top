@@ -169,3 +169,24 @@ button:active {
   background: repeating-linear-gradient(to bottom, #000 1px 3px, #fff 3px 5px);
   opacity: .15;
 }
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  padding-top: 1px;
+  padding-bottom: 3rem;
+  min-height: 100vh;
+}
+
+.credits {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 1rem;
+}
+
+.credits a:link { color: var(--shade-1); }
+.credits a:visited { color: var(--shade-5); }
+.credits a:hover { color: var(--shade-3); }
+.credits a:active { color: var(--shade-2); }
