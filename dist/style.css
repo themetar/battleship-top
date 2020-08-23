@@ -157,3 +157,15 @@ button:active {
   background: var(--shade-3);
   color: var(--shade-5);
 }
+
+.overlay {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(to bottom, #000 1px 3px, #fff 3px 5px);
+  opacity: .2;
+}

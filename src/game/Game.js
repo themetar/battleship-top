@@ -108,6 +108,7 @@ export default function Game() {
           <Chart attacks={aiChart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" && player == 0 } />
         </div>
       </div>
+      <div className="overlay"></div>
     </div>
   );
 }
