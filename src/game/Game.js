@@ -4,7 +4,7 @@ import Chart from "./Chart";
 import {HumanPlayerFactory, AIPlayerFactory} from "../lib/players";
 import GameboardFactory, {randomFleetPlacement} from "../lib/gameboard";
 
-const BOARD_SIZE = 10;
+const BOARD_SIZE = 9;
 
 let gameboards;
 let players;
