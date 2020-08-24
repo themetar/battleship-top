@@ -210,3 +210,27 @@ body {
 .credits a:visited { color: var(--shade-5); }
 .credits a:hover { color: var(--shade-3); }
 .credits a:active { color: var(--shade-2); }
+
+@media all and (min-width: 1600px) {
+  .chart-container { --cell-size: 60px; }
+  
+  .chart-container:nth-child(3) { --cell-size: 45px; }
+}
+
+@media all and (min-width: 2000px) {
+  .chart-container { --cell-size: 80px; }
+  
+  .chart-container:nth-child(3) { --cell-size: 65px; }
+}
+
+@media all and (max-width: 1200px) {
+  .chart-container { --cell-size: 45px; }
+  
+  .chart-container:nth-child(3) { --cell-size: 35px; }
+}
+
+@media all and (max-width: 800px) {
+  .chart-container { --cell-size: 35px; }
+  
+  .chart-container:nth-child(3) { --cell-size: 25px; }
+}
