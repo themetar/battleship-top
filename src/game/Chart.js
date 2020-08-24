@@ -30,7 +30,7 @@ export default function Chart(props) {
   };
 
   return (
-    <div className="chart-container">
+    <div className="chart-container"  style={{"--grid-size": attacks.length}}>
       <div className="ships">
         {
           props.ships.map(ship => {
@@ -45,7 +45,7 @@ export default function Chart(props) {
           })
         }
       </div>
-      <div className={`chart${props.active ? " active" : ""}`} style={{"--grid-size": attacks.length}} onClick={ props.active ? clickHandler : undefined }>
+      <div className={`chart${props.active ? " active" : ""}`} onClick={ props.active ? clickHandler : undefined }>
         {cells}
       </div>
     </div>
