@@ -3,3 +3,7 @@ node_modules
 
 # don't track output script
 dist/script.js
+
+# deployment script
+# see https://github.com/X1011/git-directory-deploy
+deploy.sh
