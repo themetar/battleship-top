@@ -31,7 +31,7 @@ export default function Chart(props) {
 
   return (
     <div className="chart-container"  style={{"--grid-size": attacks.length}}>
-      <div className="ships">
+      <div className="ships" style={props.editMode ? {zIndex:  2} : {}}>
         {
           props.ships.map(ship => {
             const style = {

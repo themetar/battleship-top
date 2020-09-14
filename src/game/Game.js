@@ -104,7 +104,7 @@ export default function Game() {
         <div id="charts">
           <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
           <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>Attack</p>
-          <Chart attacks={charts[0].chart} ships={ gameboards[0].shipsLocations } />
+          <Chart attacks={charts[0].chart} ships={ gameboards[0].shipsLocations } editMode={ gamePhase == "pre" } />
           <Chart attacks={charts[1].chart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" && player == 0 } />
         </div>
       </div>
