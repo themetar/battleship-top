@@ -106,4 +106,4 @@ function randomFleetPlacement(boardSize, lengths) {
 }
 
 export default GameboardFactory;
-export {randomFleetPlacement};
+export {randomFleetPlacement, hitTest};

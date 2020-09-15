@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Chart from "./Chart";
 
 import {HumanPlayerFactory, AIPlayerFactory} from "../lib/players";
-import GameboardFactory, {randomFleetPlacement} from "../lib/gameboard";
+import GameboardFactory, {randomFleetPlacement, hitTest} from "../lib/gameboard";
 
 const BOARD_SIZE = 9;
 
@@ -45,6 +45,8 @@ export default function Game() {
   });
   const [player, setPlayer] = useState(currentPlayer);
 
+  const [firstPlayerShips, setFirstPlayerShips] = useState(gameboards[0].shipsLocations);
+
   function gameStep(attack) {
     const nextPlayer = (currentPlayer + 1) % 2;
 
@@ -68,6 +70,7 @@ export default function Game() {
 
   const onPlay = () => {
     setGamePhase("playing");
+    setPlayer(currentPlayer);
     players[currentPlayer].takeTurn();
   };
 
@@ -75,6 +78,24 @@ export default function Game() {
     setGamePhase("pre");
     initGameObjects();  // reset
     charts.forEach((ch, i) => ch.setChart(gameboards[i].attackChart));
+    setFirstPlayerShips(gameboards[0].shipsLocations);
+  };
+
+  const editShipsCallback = (editType, shipIndex, position) => {
+    if (editType == "move") {
+      const ship = gameboards[0].shipsLocations[shipIndex];
+      const otherShips = gameboards[0].shipsLocations.filter((_, index) => index != shipIndex);
+
+      if (position.col < 0 || position.row < 0 || position.col + ship.width > BOARD_SIZE || position.row + ship.height > BOARD_SIZE)
+        return; // out of bounding box
+
+      if (!otherShips.some(other => hitTest(other, {x: position.col, y: position.row, width: ship.width, height: ship.height}))){
+        // valid placement
+        ship.x = position.col;
+        ship.y = position.row;
+        setFirstPlayerShips(gameboards[0].shipsLocations);
+      }
+    }
   };
 
   return (
@@ -104,7 +125,8 @@ export default function Game() {
         <div id="charts">
           <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
           <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>Attack</p>
-          <Chart attacks={charts[0].chart} ships={ gameboards[0].shipsLocations } editMode={ gamePhase == "pre" } />
+          <Chart attacks={charts[0].chart} ships={ firstPlayerShips } editMode={ gamePhase == "pre" }
+                  onEditShips={ editShipsCallback } />
           <Chart attacks={charts[1].chart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" && player == 0 } />
         </div>
       </div>
