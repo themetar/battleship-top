@@ -30,18 +30,10 @@ export default function Chart(props) {
   };
 
   const mouseOffset = {};
-  let gridRect;
   let shipIndex;
 
-  const dragStartHandler = event => {
-    gridRect = {
-      left: event.target.style.gridColumnStart,
-      top: event.target.style.gridRowStart,
-      width: event.target.style.gridColumnEnd - event.target.style.gridColumnStart,
-      height: event.target.style.gridRowEnd - event.target.style.gridRowStart,
-    };
-
-    shipIndex = props.ships.findIndex(s => s.x == gridRect.left - 1 && s.y == gridRect.top - 1 && s.width == gridRect.width && s.height == gridRect.height);
+  const dragStartHandler = (event, shipI) => {
+    shipIndex = shipI;
 
     const shipRect = event.target.getBoundingClientRect();
     mouseOffset.x = event.clientX - shipRect.left;
@@ -83,7 +75,7 @@ export default function Chart(props) {
       <div className="ships" style={props.editMode ? {zIndex:  2} : {}}
             onDragOver={dragOverHandler} onDrop={dropHandler} >
         {
-          props.ships.map(ship => {
+          props.ships.map((ship, index) => {
             const style = {
               gridColumn: `${ship.x + 1} / ${ship.x + 1 + ship.width}`,
               gridRow: `${ship.y + 1} / ${ship.y + 1 + ship.height}`,
@@ -93,7 +85,7 @@ export default function Chart(props) {
                   className="ship"
                   style={ style }
                   draggable={props.editMode}
-                  onDragStart={dragStartHandler} ></div>
+                  onDragStart={e => dragStartHandler(e, index)} ></div>
           })
         }
       </div>
