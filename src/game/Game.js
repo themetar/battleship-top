@@ -82,10 +82,10 @@ export default function Game() {
   };
 
   const editShipsCallback = (editType, shipIndex, position) => {
+    const ship = gameboards[0].shipsLocations[shipIndex];
+    const otherShips = gameboards[0].shipsLocations.filter((_, index) => index != shipIndex);
+    
     if (editType == "move") {
-      const ship = gameboards[0].shipsLocations[shipIndex];
-      const otherShips = gameboards[0].shipsLocations.filter((_, index) => index != shipIndex);
-
       if (position.col < 0 || position.row < 0 || position.col + ship.width > BOARD_SIZE || position.row + ship.height > BOARD_SIZE)
         return; // out of bounding box
 
@@ -94,6 +94,34 @@ export default function Game() {
         ship.x = position.col;
         ship.y = position.row;
         setFirstPlayerShips(gameboards[0].shipsLocations);
+      }
+    } else {
+      // editType == "rotate"
+      const after = {...ship, width: ship.height, height: ship.width};
+      const area = {left: ship.x, right: ship.x + ship.width, top: ship.y, bottom: ship.y + ship.height};
+      if (ship.height == 1) {
+        area.top -= ship.width - 1;
+      } else {
+        area.left -= ship.height - 1;
+      }
+      // constrain to board
+      area.left = area.left < 0 ? 0 : area.left;
+      area.top  = area.top  < 0 ? 0 : area.top;
+      area.right  = area.right + after.width   > BOARD_SIZE  ? BOARD_SIZE - after.width  +1  : area.right;
+      area.bottom = area.bottom + after.height > BOARD_SIZE  ? BOARD_SIZE - after.height +1 : area.bottom;
+      // try placements
+      for(after.x = area.left; after.x < area.right; after.x++) {
+        for (after.y = area.top; after.y < area.bottom; after.y++) {
+          if (!otherShips.some(other => hitTest(other, after))){
+            // valid placement
+            ship.x      = after.x;
+            ship.y      = after.y;
+            ship.width  = after.width;
+            ship.height = after.height
+            setFirstPlayerShips(gameboards[0].shipsLocations);
+            return;
+          }
+        }
       }
     }
   };

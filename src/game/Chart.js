@@ -70,6 +70,10 @@ export default function Chart(props) {
     props.onEditShips && props.onEditShips("move", shipIndex, {col, row});
   };
 
+  const rotateClickHandler = (_, shipI) => {
+    props.onEditShips && props.onEditShips("rotate", shipI);
+  };
+
   return (
     <div className="chart-container"  style={{"--grid-size": attacks.length}}>
       <div className="ships" style={props.editMode ? {zIndex:  2} : {}}
@@ -85,7 +89,8 @@ export default function Chart(props) {
                   className="ship"
                   style={ style }
                   draggable={props.editMode}
-                  onDragStart={e => dragStartHandler(e, index)} ></div>
+                  onDragStart={e => dragStartHandler(e, index)}
+                  onClick={e => rotateClickHandler(e, index)} ></div>
           })
         }
       </div>
