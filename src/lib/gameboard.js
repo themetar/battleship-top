@@ -72,7 +72,7 @@ function randomFleetPlacement(boardSize, lengths) {
       for (let x = 0; x <= boardSize - shipLength; x++) {
         for (let y = 0; y < boardSize; y++) {
           const ship = {x, y, width: shipLength, height: 1};
-          if (!positions.some(pos => hitTest(pos, ship))) {
+          if (!positions.some(pos => hitTest({x: pos.x - 1, y: pos.y - 1, width: pos.width + 2, height: pos.height + 2}, ship))) {
             options.push(ship);
           }
         }
@@ -82,7 +82,7 @@ function randomFleetPlacement(boardSize, lengths) {
       for (let x = 0; x < boardSize; x++) {
         for (let y = 0; y <= boardSize - shipLength; y++) {
           const ship = {x, y, width: 1, height: shipLength};
-          if (!positions.some(pos => hitTest(pos, ship))) {
+          if (!positions.some(pos => hitTest({x: pos.x - 1, y: pos.y - 1, width: pos.width + 2, height: pos.height + 2}, ship))) {
             options.push(ship);
           }
         }
