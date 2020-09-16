@@ -41,16 +41,6 @@ export default function Chart(props) {
   };
 
   const dragOverHandler = event => {
-    const chartRect = event.currentTarget.getBoundingClientRect();
-    let x = event.clientX - chartRect.left - mouseOffset.x;
-    let y = event.clientY - chartRect.top - mouseOffset.y;
-
-    const gridSize = attacks.length;
-    const roughCellSize = chartRect.width / gridSize;
-
-    const col = Math.round(x / roughCellSize);
-    const row = Math.round(y / roughCellSize);
-
     event.preventDefault();
   };
 
