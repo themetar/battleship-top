@@ -151,11 +151,15 @@ export default function Game() {
           ) }
         </div>
         <div id="charts">
-          <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
-          <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>Attack</p>
-          <Chart attacks={charts[0].chart} ships={ firstPlayerShips } editMode={ gamePhase == "pre" }
-                  onEditShips={ editShipsCallback } />
-          <Chart attacks={charts[1].chart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" && player == 0 } />
+          <div className="side">
+            <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
+            <Chart attacks={charts[0].chart} ships={ firstPlayerShips } editMode={ gamePhase == "pre" }
+                    onEditShips={ editShipsCallback } />
+          </div>
+          <div className="side">
+            <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>Attack</p>
+            <Chart attacks={charts[1].chart} ships={ gameboards[1].sunkShipsLocations } commandCallback={ attack => players[0].makeMove(attack) } active={ gamePhase == "playing" && player == 0 } />
+          </div>
         </div>
       </div>
       <div className="overlay"></div>

@@ -38,7 +38,13 @@ html {
   position: relative;
 }
 
-.chart-container:nth-child(3) {
+.side {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.side:nth-child(1) .chart-container {
   --cell-size: 40px;
   align-self: center;
   --shade-0: #DAD7CD;
