@@ -155,6 +155,7 @@ export default function Game() {
             <p style={ {visibility: gamePhase == "playing" && player == 1 ? "visible" : "hidden"} }>Incoming</p>
             <Chart attacks={charts[0].chart} ships={ firstPlayerShips } editMode={ gamePhase == "pre" }
                     onEditShips={ editShipsCallback } />
+            { gamePhase == "pre" && <p><small>(Drag and drop ships to position them. Click to rotate them.)</small></p> }
           </div>
           <div className="side">
             <p style={ {visibility: gamePhase == "playing" && player == 0 ? "visible" : "hidden"} }>Attack</p>
