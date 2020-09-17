@@ -46,7 +46,6 @@ html {
 
 .side:nth-child(1) .chart-container {
   --cell-size: 40px;
-  align-self: center;
   --shade-0: #DAD7CD;
   --shade-1: #A3B18A;
   --shade-2: #588157;
@@ -129,7 +128,7 @@ html {
 
 .prompt {
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -220,23 +219,41 @@ body {
 @media all and (min-width: 1600px) {
   .chart-container { --cell-size: 60px; }
   
-  .chart-container:nth-child(3) { --cell-size: 45px; }
+  .side:nth-child(1) .chart-container { --cell-size: 45px; }
 }
 
 @media all and (min-width: 2000px) {
   .chart-container { --cell-size: 80px; }
   
-  .chart-container:nth-child(3) { --cell-size: 65px; }
+  .side:nth-child(1) .chart-container { --cell-size: 65px; }
 }
 
 @media all and (max-width: 1200px) {
   .chart-container { --cell-size: 45px; }
   
-  .chart-container:nth-child(3) { --cell-size: 35px; }
+  .side:nth-child(1) .chart-container { --cell-size: 35px; }
 }
 
 @media all and (max-width: 800px) {
+  html { font-size: 12px; }
+
   .chart-container { --cell-size: 35px; }
   
-  .chart-container:nth-child(3) { --cell-size: 25px; }
+  .side:nth-child(1) .chart-container { --cell-size: 25px; }
+}
+
+@media all and (max-aspect-ratio: 1 / 1) {
+  .prompt {
+    position: static;
+    transform: none;
+  }
+
+  #charts {
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+  }
+
+  .chart-container { --cell-size: 30px; }
+  
+  .side:nth-child(1) .chart-container { --cell-size: 20px; }
 }
