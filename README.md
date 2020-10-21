@@ -2,6 +2,15 @@
 
 Version of the classic Battleship game, built with JS+CSS+HTML and [React](https://reactjs.org/).
 
+## Gameplay
+
+Place your ships on the map, then try to destroy your adversary's fleet. Take turns with your oponent, the Computer, to hit as many of one another's ships.
+
+## Features
+
+* Dran-and-drop ship placement
+* AI enemy
+
 ## Run it locally
 
 Prerequisites: [nodejs and npm](https://nodejs.org/en/)
